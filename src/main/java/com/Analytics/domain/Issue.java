@@ -3,6 +3,8 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 import org.springframework.data.annotation.Id;
 
+import java.util.UUID;
+
 @Table("Issue")
 public class Issue{
     @Id
@@ -17,19 +19,19 @@ public class Issue{
     private boolean inProgress;
 
 
-    public int getIssueID() {
+    public UUID getIssueID() {
         return issueID;
     }
 
-    public void setIssueID(int issueID) {
+    public void setIssueID(UUID issueID) {
         this.issueID = issueID;
     }
 
-    public int getOpenedBy() {
+    public UUID getOpenedBy() {
         return openedBy;
     }
 
-    public void setOpenedBy(int openedBy) {
+    public void setOpenedBy(UUID openedBy) {
         this.openedBy = openedBy;
     }
 
@@ -41,11 +43,11 @@ public class Issue{
         this.issueTitle = issueTitle;
     }
 
-    public int getClosedBy() {
+    public UUID getClosedBy() {
         return closedBy;
     }
 
-    public void setClosedBy(int closedBy) {
+    public void setClosedBy(UUID closedBy) {
         this.closedBy = closedBy;
     }
 
