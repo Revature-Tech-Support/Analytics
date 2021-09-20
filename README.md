@@ -1,12 +1,5 @@
 # TechSupport-Analytics
-
-
-----------------
-
-(Placeholder for everything below this line>>>)-----------------------------------------------
-
-# TechSupport-Gateway
-The Gateway and Discovery Service for the application
+Where analytical reports of issue handling are created from the chat application
 
 
 ## Client Specifications:
@@ -14,24 +7,17 @@ The Gateway and Discovery Service for the application
 
 
 ## Goal:
-Connecting all the microservice together for a functional chat application
-
+Reports that detail:
+   1. Issues resolved per Tech Support Specialist
+   2. Average wait time per issue
+   3. Average resolution time per issue
+   
 
 ## User Stories:
-### User
-- As a User
-- I want a gateway service
-- So that I can seemlessly utilize the chat application, completely executed via abstraction
-
 ### Tech Support
 - As a Tech Support
-- I want a gateway service
-- So that I can chat with the queue (First In First Out - FIFO) about their technical issues, utlizing all the functonalities of each feature
-
-### Admin
-- As an Admin
-- I want a gateway service
-- So that I can connect all frontend features with all backend end features for the User and Tech Support
+- I want analytical reports
+- So that I can optimize our internal support process
 
 
 ## Technology:
