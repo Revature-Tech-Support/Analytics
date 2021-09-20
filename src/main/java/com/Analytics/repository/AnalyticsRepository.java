@@ -5,14 +5,25 @@ import org.springframework.data.cassandra.repository.ReactiveCassandraRepository
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
+import javax.annotation.Nonnull;
 import java.util.UUID;
 
 @Repository
 public interface AnalyticsRepository extends ReactiveCassandraRepository<Issue, UUID> {
-    @Query("SELECT COUNT(*) FROM Issue WHERE inProgress = False ALLOW FILTERING;")
+    @Nonnull
+    @Query("SELECT * FROM Issue WHERE inQueue = False ALLOW FILTERING;")
     public Flux<Issue> getResolvedIssues();
 
-    @Query("SELECT closedBy, COUNT(*) FROM Issue WHERE inProgress = False GROUP BY closedBy ALLOW FILTERING;")
-    public Flux<Issue> getTechSupport();
+    @Nonnull
+    @Query("SELECT * FROM Issue WHERE closedBy = ?0 ALLOW FILTERING;")
+    public Flux<Issue> getTechSupport(UUID tech);
+
+    @Nonnull
+    @Query("SELECT AVG(DAYDIFF(closedTime,reviewTime)) From Issue GROUP BY closedBy")
+    public Flux<Issue> getResolveTime();
+
+    @Nonnull
+    @Query("SELECT AVG(TIMEDIFF(reviewTime,openTime)) From Issue GROUP BY closedBy")
+    public Flux<Issue> getWaitTime();
 
 }

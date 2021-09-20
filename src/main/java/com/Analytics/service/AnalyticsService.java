@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.UUID;
+
 @Service
 public class AnalyticsService {
 
@@ -20,6 +22,12 @@ public class AnalyticsService {
     public Flux<Issue> closedIssues(){
         return  repo.getResolvedIssues();
     }
+
+    public Flux<Issue> techSupportAgent(UUID uuid){return repo.getTechSupport(uuid);}
+
+    public Flux<Issue> waitTime(){return repo.getWaitTime();}
+
+    public Flux<Issue> resolveTime(){return repo.getResolveTime();}
 
 
 }

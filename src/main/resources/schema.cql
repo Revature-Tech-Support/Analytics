@@ -19,7 +19,7 @@ openTime TIMESTAMP,
 reviewTime TIMESTAMP,
 closedTime TIMESTAMP,
 inQueue BOOLEAN,
-PRIMARY KEY (issueID)
+PRIMARY KEY (issueID, closedBy)
 );
 
 CREATE TABLE IF NOT EXISTS Chat (
