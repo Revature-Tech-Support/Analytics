@@ -18,68 +18,18 @@ public class Issue{
     private String closedTime;
     private boolean inProgress;
 
-
-    public UUID getIssueID() {
-        return issueID;
-    }
-
-    public void setIssueID(UUID issueID) {
+    public Issue(UUID issueID, String issueTitle, UUID openedBy, UUID closedBy, String openTime, String reviewTime, String closedTime, boolean inProgress) {
         this.issueID = issueID;
-    }
-
-    public UUID getOpenedBy() {
-        return openedBy;
-    }
-
-    public void setOpenedBy(UUID openedBy) {
-        this.openedBy = openedBy;
-    }
-
-    public String getIssueTitle() {
-        return issueTitle;
-    }
-
-    public void setIssueTitle(String issueTitle) {
         this.issueTitle = issueTitle;
-    }
-
-    public UUID getClosedBy() {
-        return closedBy;
-    }
-
-    public void setClosedBy(UUID closedBy) {
+        this.openedBy = openedBy;
         this.closedBy = closedBy;
-    }
-
-    public String getOpenTime() {
-        return openTime;
-    }
-
-    public void setOpenTime(String openTime) {
         this.openTime = openTime;
-    }
-
-    public String getReviewTime() {
-        return reviewTime;
-    }
-
-    public void setReviewTime(String reviewTime) {
         this.reviewTime = reviewTime;
-    }
-
-    public String getClosedTime() {
-        return closedTime;
-    }
-
-    public void setClosedTime(String closedTime) {
         this.closedTime = closedTime;
-    }
-
-    public boolean isInProgress() {
-        return inProgress;
-    }
-
-    public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
+    }
+
+    public Issue() {
+
     }
 }

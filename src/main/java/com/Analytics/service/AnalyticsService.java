@@ -9,18 +9,13 @@ import reactor.core.publisher.Mono;
 @Service
 public class AnalyticsService {
 
-
-    private AnalyticsRepository repo;
+    @Autowired
+    private final AnalyticsRepository repo;
 
     public AnalyticsService(AnalyticsRepository repo)
     {
         this.repo =repo;
     }
-    public AnalyticsService()
-    {
-
-    }
-
 
     public Flux<Issue> closedIssues(){
         return  repo.getResolvedIssues();
