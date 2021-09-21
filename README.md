@@ -32,3 +32,9 @@ Reports that detail:
 - Cassandra
 - Spring Webflux
 - Amazon Web Services
+
+## Endpoints:
+"/analysis/resolved"
+"/analysis/resolved/{uuid}"
+"/analysis/wait"
+"/analysis/resolveTime"
