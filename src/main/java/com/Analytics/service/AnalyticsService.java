@@ -42,9 +42,9 @@ public class AnalyticsService {
 
 
             Duration timeDuration = Duration.between(reviewTime, closedTime);
-            float durationInSeconds = timeDuration.toSeconds();
+            float duration = timeDuration.toMinutes();
 
-            return Mono.just(durationInSeconds);
+            return Mono.just(duration);
         })
                 .collectList()
                 .flatMap(x -> {
@@ -55,9 +55,9 @@ public class AnalyticsService {
                             sum += x.get(i);
                         }
                         long average = sum / x.size();
-                        return Mono.just(average / 60);
+                        return Mono.just(average);
                     } else {
-                        return Mono.just(new Long(0));
+                        return Mono.just(0L);
                     }
                 });
 
