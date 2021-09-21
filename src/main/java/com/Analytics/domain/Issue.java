@@ -35,7 +35,8 @@ public class Issue{
     @Column
     private boolean inQueue;
 
-    public Issue(Instant closedTime, Instant reviewTime) {
+    public Issue(Instant openTime, Instant reviewTime, Instant closedTime) {
+        this.openTime = openTime;
         this.closedTime = closedTime;
         this.reviewTime = reviewTime;
     }
