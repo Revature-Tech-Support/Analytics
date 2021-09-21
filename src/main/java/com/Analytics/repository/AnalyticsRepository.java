@@ -16,6 +16,7 @@ public interface AnalyticsRepository extends ReactiveCassandraRepository<Issue, 
     @Query("SELECT * FROM Issue WHERE closedBy = ?0 AND inQueue = False ALLOW FILTERING;")
     public Flux<Issue> getResolvedIssuesByTechSupport(UUID tech);
 
+
     @Query("SELECT openTime, reviewTime, closedTime FROM issue WHERE issueTitle = ?0 ALLOW FILTERING")
     public Flux<Issue> getTimestampsFromIssue(String issueTitle);
 
