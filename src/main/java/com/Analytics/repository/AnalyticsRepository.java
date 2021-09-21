@@ -1,5 +1,4 @@
 package com.Analytics.repository;
-import com.Analytics.domain.CloseAndReviewTime;
 import com.Analytics.domain.Issue;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository;
