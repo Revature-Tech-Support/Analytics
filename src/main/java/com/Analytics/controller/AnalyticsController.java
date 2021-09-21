@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @RestController
@@ -39,27 +38,21 @@ public class AnalyticsController {
     public Flux<Issue> getTechResolvedIssues(@PathVariable UUID uuid)
     {
         log.info("Getting Resolved Issues by Tech");
-        return service.techSupportAgent(uuid);
+        return service.getIssuesCompletedByTechSupport(uuid);
     }
 
     @GetMapping("/wait")
-    public Flux<Issue> getWaitTime()
+    public Mono<Long> getWaitTime()
     {
         log.info("Geting waiting time");
-        return service.waitTime();
+        return service.getWaitTime();
     }
 
     @GetMapping("/resolveTime")
-    public Flux<Issue> getResolveTime()
+    public Mono<Long> getResolveTime()
     {
         log.info("Geting resolve time");
-        return service.resolveTime();
-    }
-
-    @GetMapping("/averageResolveTime")
-    public Mono<Long> getAverageResolveTime() {
-        log.info("Getting average resolve time");
-        return service.getAverageResolveTime();
+        return service.getResolveTime();
     }
 
 }

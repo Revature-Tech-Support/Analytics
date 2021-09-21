@@ -1,5 +1,7 @@
 package com.Analytics.domain;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -12,6 +14,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table("Issue")
 public class Issue{
     @PrimaryKeyColumn(type = PrimaryKeyType.PARTITIONED)
@@ -31,15 +35,9 @@ public class Issue{
     @Column
     private boolean inQueue;
 
-    public Issue(UUID issueID, String issueTitle, UUID openedBy, UUID closedBy, Instant openTime, Instant reviewTime, Instant closedTime, boolean inQueue) {
-        this.issueID = issueID;
-        this.issueTitle = issueTitle;
-        this.openedBy = openedBy;
-        this.closedBy = closedBy;
-        this.openTime = openTime;
-        this.reviewTime = reviewTime;
+    public Issue(Instant closedTime, Instant reviewTime) {
         this.closedTime = closedTime;
-        this.inQueue = inQueue;
+        this.reviewTime = reviewTime;
     }
 
     @Nonnull

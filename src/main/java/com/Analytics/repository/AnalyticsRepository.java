@@ -10,20 +10,16 @@ import java.util.UUID;
 
 @Repository
 public interface AnalyticsRepository extends ReactiveCassandraRepository<Issue, UUID> {
-    @Nonnull
     @Query("SELECT * FROM Issue WHERE inQueue = False ALLOW FILTERING;")
     public Flux<Issue> getResolvedIssues();
 
-    @Nonnull
     @Query("SELECT * FROM Issue WHERE closedBy = ?0 ALLOW FILTERING;")
-    public Flux<Issue> getTechSupport(UUID tech);
+    public Flux<Issue> getIssuesCompletedByTechSupport(UUID tech);
 
-    @Nonnull
-    @Query("SELECT AVG(DAYDIFF(closedTime,reviewTime)) From Issue GROUP BY closedBy")
+    @Query("SELECT closedTime, reviewTime from issue")
     public Flux<Issue> getResolveTime();
 
-    @Nonnull
-    @Query("SELECT AVG(TIMEDIFF(reviewTime,openTime)) From Issue GROUP BY closedBy")
+    @Query("SELECT reviewTime, openTime FROM issue")
     public Flux<Issue> getWaitTime();
 
 }
