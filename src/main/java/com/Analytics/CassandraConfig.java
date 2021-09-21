@@ -11,6 +11,7 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 
 import java.util.List;
 
+
 @EnableCassandraRepositories
 @Configuration
 @PropertySource("classpath:applications.properties")

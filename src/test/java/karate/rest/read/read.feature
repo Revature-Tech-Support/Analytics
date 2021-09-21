@@ -1,7 +1,7 @@
 Feature: Gets resolved issues, issues per tech, and wait time analytics
 
   Background:
-    * url baseUrl = 'http://localhost:8080'
+    * url baseUrl
     * def analyticsBase = '/analysis/'
 
   Scenario: Get all resolved issues
