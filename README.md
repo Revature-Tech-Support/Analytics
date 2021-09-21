@@ -34,7 +34,7 @@ Reports that detail:
 - Amazon Web Services
 
 ## Endpoints:
-- "/analysis/resolved"
-- "/analysis/resolved/{uuid}"
-- "/analysis/wait"
-- "/analysis/resolveTime"
+- `/analysis/resolved`
+- `/analysis/resolved/{uuid}`
+- `/analysis/wait`
+- `/analysis/resolveTime`
