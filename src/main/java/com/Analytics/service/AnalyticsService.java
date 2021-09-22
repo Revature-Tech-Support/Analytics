@@ -34,72 +34,64 @@ public class AnalyticsService {
      * @param uuid id of tech support agent
      * @return Issues closed by tech support agent
      */
-    public Flux<Issue> getIssuesCompletedByTechSupport(UUID uuid){return repo.getIssuesCompletedByTechSupport(uuid);}
+    public Flux<Issue> getIssuesCompletedByTechSupport(UUID uuid){return repo.getResolvedIssuesByTechSupport(uuid);}
 
     /**
-     * Calculate the average wait time
-     * @return Average wait time in between issues in minutes
+     * Returns the average wait time per all issues
      */
     public Mono<Long> getWaitTime() {
-        return repo.getWaitTime()
-                //Returns a flux contain difference between the closed time and review time in minutes
-                .flatMap(issue -> {
-                    Duration timeDuration = Duration.between(issue.getOpenTime(), issue.getReviewTime());
-                    //convert to readable format (minutes)
-                    Long duration = timeDuration.toMinutes();
-                    return Mono.just(duration);
-                })
-                //Convert flux into iterable list
-                .collectList()
-                //Calculate the average wait time
-                .flatMap(x -> {
-                    if (x.size() > 0) {
-                        long sum = 0;
-
-                        for (int i = 0; i < x.size(); i++) {
-                            sum += x.get(i);
-                        }
-                        long average = sum / x.size();
-                        return Mono.just(average);
-                    } else {
-                        return Mono.just(0L);
-                    }
-                });
+        Flux<Long> flux = repo.getTimestamps()
+                .flatMap(issue -> Mono.just(Duration.between(issue.getOpenTime(), issue.getReviewTime()).toMinutes()));
+        return CalculateAverage(flux);
     }
 
     /**
-     * Calculates the average time to resolve an issue and returns it in Minutes
-     * @return Average time to resolve an issue in minutes
+     * Return the average wait time per issue
+     */
+    public Mono<Long> getWaitTimeByIssue(String issueTitle) {
+        Flux<Long> flux = repo.getTimestampsFromIssue(issueTitle)
+                .flatMap(issue -> Mono.just(Duration.between(issue.getOpenTime(), issue.getReviewTime()).toMinutes()));
+        return CalculateAverage(flux);
+    }
+
+    /**
+     * Returns the average resolve time per all issues
      */
     public Mono<Long> getResolveTime() {
-        return repo.getResolveTime()
-                //Returns the difference between the closed time and review time
-                .flatMap(x -> {
-                    //Calculate the difference between closed time and review time
-                    Duration timeDuration = Duration.between(x.getReviewTime(), x.getClosedTime());
-                    //convert to readable format (minutes)
-                    Long duration = timeDuration.toMinutes();
-
-                    return Mono.just(duration);
-                })
-                //Convert the flux to an iterable list
-                .collectList()
-                //Calculate the average resolve and return a Mono<Long>
-                .flatMap(x -> {
-                    if (x.size() > 0) {
-                        long sum = 0;
-
-                        for (int i = 0; i < x.size(); i++) {
-                            sum += x.get(i);
-                        }
-                        long average = sum / x.size();
-                        return Mono.just(average);
-                    } else {
-                        return Mono.just(0L);
-                    }
-                });
+        Flux<Long> flux = repo.getTimestamps()
+                .flatMap(issue -> Mono.just(Duration.between(issue.getReviewTime(), issue.getClosedTime()).toMinutes()));
+        return CalculateAverage(flux);
 
     }
 
+    /**
+     * Returns the average resolve time per issue
+     */
+    public Mono<Long> getResolveTimeByIssue(String issueTitle) {
+        Flux<Long> flux = repo.getTimestampsFromIssue(issueTitle)
+                .flatMap(issue -> Mono.just(Duration.between(issue.getReviewTime(), issue.getClosedTime()).toMinutes()));
+        return CalculateAverage(flux);
+    }
+
+    /**
+     * Calculates the average number from a Flux
+     * @param flux Flux to average
+     * @return Average number
+     */
+    private Mono<Long> CalculateAverage(Flux<Long> flux) {
+        return flux
+                //Converts flux to an iterable list type within Mono<List<Long>>
+                .collectList()
+                //Map it to single value
+                .flatMap(x -> {
+                    long sum = 0;
+
+                    for (int i =0;i < x.size(); i++) {
+                        sum += x.get(i);
+                    }
+
+                    return Mono.just(sum / x.size());
+                });
+    }
 
 }

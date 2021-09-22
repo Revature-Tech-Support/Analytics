@@ -47,7 +47,7 @@ VALUES (
     d00af75e-7176-4b92-bef0-31bed390741f,
     d00af75e-7176-4b92-bef0-31bed390741f,
     '2021-09-20 15:30:48+0000',
-    '2021-09-20 15:30:48+0000',
+    '2021-09-20 15:35:48+0000',
     '2021-09-20 15:50:48+0000',
     false
 );
@@ -55,7 +55,7 @@ VALUES (
 INSERT INTO Issue (issueid,issuetitle,openedby,closedby,opentime,reviewtime,closedtime,inQueue)
 VALUES (
     5c9ea820-0aa6-43c9-ab90-fb6a9e293d65,
-    'Setup Issue',
+    'Test',
     d00af75e-7176-4b92-bef0-31bed390741f,
     d00af75e-7176-4b92-bef0-31bed390741f,
     '2021-09-20 15:30:48+0000',
@@ -71,7 +71,7 @@ VALUES (
     d00af75e-7176-4b92-bef0-31bed390741f,
     d00af75e-7176-4b92-bef0-31bed390741f,
     '2021-09-20 15:30:48+0000',
-    '2021-09-20 15:30:48+0000',
+    '2021-09-20 15:40:48+0000',
     '2021-09-20 15:50:48+0000',
     false
 );
