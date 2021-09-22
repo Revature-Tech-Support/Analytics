@@ -34,7 +34,7 @@ Reports that detail:
 - Amazon Web Services
 
 ## Endpoints:
-- `/analysis/resolved`
-- `/analysis/resolved/{uuid}`
-- `/analysis/wait`
-- `/analysis/resolveTime`
+- GET `localhost:8080/analysis/resolved`
+- GET `localhost:8080/analysis/resolved/{uuid}`
+- GET `localhost:8080/analysis/wait`
+- GET `localhost:8080/analysis/resolveTime`
