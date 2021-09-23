@@ -22,16 +22,17 @@ Reports that detail:
 
 ## Technology:
 - Java
-   - Google Standards
-   - Lombok
+- Lombok
 - Spring Boot
+- Spring Webflux
+- Spring Cloud Netflix
 - JUnit 5
+- Karate
 - Logback classic (SLF4J)
 - Maven
 - Reactor Netty
 - Cassandra
-- Spring Webflux
-- Amazon Web Services
+
 
 ## Endpoints:
 - GET `localhost:8080/analysis/resolved`
